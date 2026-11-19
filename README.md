@@ -58,9 +58,15 @@ Im Formular wählt das Mitglied eine oder mehrere Veranstaltungsarten aus
 `tl_event_type`. Gespeichert werden sie über das Feld `eventType` in
 `tl_calendar_events`, eine Haste-Beziehung vom Typ `haste-ManyToMany` mit der
 Zwischentabelle `tl_calendar_events_event_type`. Diese DCA-Definition gehört
-**nicht** zu diesem Bundle und auch nicht zum früheren Redmind-Code in
-`src/redmind/`; sie stammt aus einem anderen Teil der schachbund.de-Installation
-und muss dort bleiben.
+**nicht** zu diesem Bundle. Redmind hat sie auf schachbund.de projektweit in
+`app/Resources/contao/` angelegt, nicht in `src/redmind/`:
+`dca/tl_event_type.php` (Tabelle), `dca/tl_calendar_events.php` (Feld `eventType`),
+`config/config.php` (Backend-Modul `event_types`) und die Sprachdateien. Die
+Dateien bleiben bei der Umstellung unverändert liegen.
+
+Das Feld hat keine eigene Spalte in `tl_calendar_events`; Haste speichert die
+Zuordnung nur in der Zwischentabelle. Deshalb muss `CalendarEventsHasteModel` von
+`Haste\Model\Model` erben.
 
 Damit Haste die Arten beim Bearbeiten wieder laden kann, registriert das Bundle
 ein Modell `EventTypeModel` für `tl_event_type`, falls noch keines registriert ist.

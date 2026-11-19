@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.0.1 (2026-11-19)
+
+* Change: README nennt den genauen Ort der Veranstaltungsarten auf schachbund.de:
+  `app/Resources/contao/` mit DCA für `tl_event_type`, Feld `eventType` und
+  Backend-Modul `event_types`. Diese Dateien bleiben bei der Umstellung liegen.
+
 ## Version 1.0.0 (2026-11-19)
 
 * Add: Eigenständiges Contao-Bundle `schachbulle/contao-membercalendar-bundle`
