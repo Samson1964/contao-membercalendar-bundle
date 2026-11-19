@@ -1,0 +1,46 @@
+{
+    "name": "schachbulle/contao-membercalendar-bundle",
+    "type": "contao-bundle",
+    "description": "Angemeldete Mitglieder legen im Frontend eigene Termine an, bearbeiten und löschen sie; mit Benachrichtigung über das Notification Center. Entwickelt für die Website des Deutschen Schachbundes.",
+    "keywords": ["contao", "kalender", "termine", "mitglieder", "frontend", "notification center", "dsb"],
+    "homepage": "https://github.com/Samson1964/contao-membercalendar-bundle",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "redmind GmbH",
+            "email": "info@redmind.de",
+            "role": "Ursprünglicher Autor"
+        },
+        {
+            "name": "Frank Hoppe",
+            "homepage": "https://www.schachbulle.de/",
+            "role": "Wartung"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "codefog/contao-haste": "^4.24",
+        "contao/core-bundle": "^4.13",
+        "contao/calendar-bundle": "^4.13",
+        "terminal42/notification_center": "^1.6"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.3.1"
+    },
+    "conflict": {
+        "contao/core": "*",
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Schachbulle\\ContaoMembercalendarBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Schachbulle\\ContaoMembercalendarBundle\\ContaoManager\\Plugin"
+    },
+    "support": {
+        "issues": "https://github.com/Samson1964/contao-membercalendar-bundle/issues",
+        "source": "https://github.com/Samson1964/contao-membercalendar-bundle"
+    }
+}

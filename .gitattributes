@@ -1,0 +1,4 @@
+# Nicht mit ins Composer-Archiv aufnehmen
+.gitattributes export-ignore
+/tests export-ignore
+/phpunit.xml.dist export-ignore

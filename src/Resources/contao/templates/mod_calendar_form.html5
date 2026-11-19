@@ -1,0 +1,54 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+<?php if (!empty($this->eventData['addImage'])): ?>
+<p class="image"><strong><?= $GLOBALS['TL_LANG']['calendar_form']['uploaded_image'] ?></strong><br>
+<i>(Das Bild wird in dieser Vorschau mit einer festen Größe von 600 Pixeln Breite dargestellt.)</i><br>
+{{image::<?= $this->eventData['singleSRC'] ?>?width=600}}
+</p>
+<?php endif; ?>
+
+<?php if ($this->enclosure): ?>
+<p class="enclosure">
+    <strong><?= $GLOBALS['TL_LANG']['calendar_form']['uploaded_enclosure'] ?></strong><br>
+    <?php foreach ($this->enclosure as $enclosure): ?>
+    <a href="<?= $enclosure['href'] ?>" title="<?= $enclosure['title'] ?>"><?= $enclosure['link'] ?></a><br>
+    <?php endforeach; ?>
+</p>
+<?php endif; ?>
+
+<?= $this->form ?>
+
+<?php
+
+$GLOBALS['TL_BODY'][] = \Contao\Template::generateScriptTag('assets/tinymce4/js/tinymce.min.js');
+$GLOBALS['TL_BODY'][] = \Contao\Template::generateScriptTag('assets/tinymce4/js/langs/'.$GLOBALS['TL_LANGUAGE'].'.js');
+$GLOBALS['TL_BODY'][] = \Contao\Template::generateInlineScript("tinymce.init({
+    skin: 'oxide',
+    selector: 'textarea.tinymce',
+    menubar: false,
+    statusbar: false,
+    plugins: 'link lists',
+    toolbar: 'bold italic | bullist numlist | link unlink',
+    setup: function(editor) {
+      editor.getElement().removeAttribute('required');
+    }
+});");
+
+$GLOBALS['TL_CSS'][] = 'bundles/contaomembercalendar/flatpickr-calendar/flatpickr.min.css';
+$GLOBALS['TL_BODY'][] = \Contao\Template::generateScriptTag('bundles/contaomembercalendar/flatpickr-calendar/flatpickr.min.js');
+$GLOBALS['TL_BODY'][] = \Contao\Template::generateScriptTag('bundles/contaomembercalendar/flatpickr-calendar/flatpickr.de.js');
+$GLOBALS['TL_BODY'][] = \Contao\Template::generateInlineScript('flatpickr.localize(flatpickr.l10ns.de);
+flatpickr("input.date", {
+    dateFormat: "d.m.Y",
+    minDate: "today",
+    allowInput: true,
+    "locale": {
+        "firstDayOfWeek": 1
+    }
+});
+
+');
+?>
+<?php $this->endblock(); ?>

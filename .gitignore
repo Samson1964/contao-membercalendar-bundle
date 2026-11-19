@@ -1,0 +1,16 @@
+# Composer
+/composer.lock
+/vendor/
+
+# PhpUnit
+/phpunit.xml
+/.phpunit.result.cache
+
+# Editoren
+/.idea/
+/.vscode/
+Thumbs.db
+.DS_Store
+
+# Private Arbeitsnotiz
+/TODO.md

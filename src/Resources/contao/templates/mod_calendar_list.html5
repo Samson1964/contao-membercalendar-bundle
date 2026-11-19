@@ -1,0 +1,29 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+<?php if ($this->message): ?>
+<p class="message"><?= $this->message ?></p>
+<?php endif; ?>
+
+<div class="event_list">
+<?php if ($this->events): ?>
+    <table>
+        <?php $count = 0; ?>
+        <?php foreach ($this->events as $event): ?>
+        <tr class="<?= ++$count % 2 ? 'odd' : 'even' ?>">
+            <td><?= date('d.m.Y', (int) $event['startDate']) ?><?php if ((int) $event['endDate'] > (int) $event['startDate']): ?> - <?= date('d.m.Y', (int) $event['endDate']) ?><?php endif; ?></td>
+            <td><?= $event['title'] ?></td>
+            <td><a href="<?= $this->url ?>?event_id=<?= $event['id'] ?>" class="ctamore"><?= $GLOBALS['TL_LANG']['calender_list']['edit'] ?></a></td>
+            <td><a href="{{env::request}}?event_id=<?= $event['id'] ?>&amp;delete=1" class="ctamore"><?= $GLOBALS['TL_LANG']['calender_list']['delete'] ?></a></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+<?php else: ?>
+    <p><?= $GLOBALS['TL_LANG']['calender_list']['no_events'] ?></p>
+<?php endif; ?>
+</div>
+
+<?= $this->calendar ?>
+
+<?php $this->endblock(); ?>
