@@ -14,8 +14,8 @@ gepflegt und hier als eigenständiges Contao-Bundle verpackt.
 * Contao 4.13 mit Kalender-Bundle
 * [Haste](https://packagist.org/packages/codefog/contao-haste) **^4.24**
 * [Notification Center](https://packagist.org/packages/terminal42/notification_center) ^1.6
-* Die Tabelle `tl_event_type` und das Feld `eventType` in `tl_calendar_events`
-  als Haste-Beziehung (siehe unten) – **beides bringt dieses Bundle nicht mit**.
+* [Veranstaltungsarten-Bundle](https://github.com/Samson1964/contao-eventtypes-bundle) ^1.0
+  (wird von Composer mitinstalliert)
 
 ### Warum Haste 4?
 
@@ -57,35 +57,32 @@ Mitglieds“. Verfügbare Platzhalter: `##form_*##` mit allen Formularfeldern un
 Im Formular wählt das Mitglied eine oder mehrere Veranstaltungsarten aus
 `tl_event_type`. Gespeichert werden sie über das Feld `eventType` in
 `tl_calendar_events`, eine Haste-Beziehung vom Typ `haste-ManyToMany` mit der
-Zwischentabelle `tl_calendar_events_event_type`. Diese DCA-Definition gehört
-**nicht** zu diesem Bundle. Redmind hat sie auf schachbund.de projektweit in
-`app/Resources/contao/` angelegt, nicht in `src/redmind/`:
-`dca/tl_event_type.php` (Tabelle), `dca/tl_calendar_events.php` (Feld `eventType`),
-`config/config.php` (Backend-Modul `event_types`) und die Sprachdateien. Die
-Dateien bleiben bei der Umstellung unverändert liegen.
+Zwischentabelle `tl_calendar_events_event_type`. Feld, Tabelle, Backend-Modul
+und Modell stellt das
+[Veranstaltungsarten-Bundle](https://github.com/Samson1964/contao-eventtypes-bundle) bereit.
 
 Das Feld hat keine eigene Spalte in `tl_calendar_events`; Haste speichert die
 Zuordnung nur in der Zwischentabelle. Deshalb muss `CalendarEventsHasteModel` von
 `Haste\Model\Model` erben.
 
-Damit Haste die Arten beim Bearbeiten wieder laden kann, registriert das Bundle
-ein Modell `EventTypeModel` für `tl_event_type`, falls noch keines registriert ist.
-
 ## Installation
 
-Solange das Paket nicht auf Packagist steht, das GitHub-Repository als Quelle in
-die `composer.json` des Projekts eintragen:
+Solange die Pakete nicht auf Packagist stehen, beide GitHub-Repositories als
+Quelle in die `composer.json` des Projekts eintragen. Composer liest
+`repositories` nur aus der Projektdatei, deshalb muss auch die Abhängigkeit dort
+stehen:
 
 ```json
 "repositories": [
-    { "type": "vcs", "url": "https://github.com/Samson1964/contao-membercalendar-bundle" }
+    { "type": "vcs", "url": "https://github.com/Samson1964/contao-membercalendar-bundle" },
+    { "type": "vcs", "url": "https://github.com/Samson1964/contao-eventtypes-bundle" }
 ]
 ```
 
 Danach:
 
 ```bash
-composer require schachbulle/contao-membercalendar-bundle:^1.0
+composer require schachbulle/contao-membercalendar-bundle:^1.1
 vendor/bin/contao-console contao:install
 vendor/bin/contao-console cache:clear --env=prod
 ```
@@ -95,7 +92,9 @@ vendor/bin/contao-console cache:clear --env=prod
 1. In der `composer.json` des Servers den psr-4-Eintrag
    `"Redmind\\MemberCalendarBundle\\": "src/redmind/MemberCalendarBundle/"` entfernen und
    `RedmindMemberCalendarBundle` aus `app/ContaoManagerPlugin.php` (bzw. `config/bundles.php`) austragen.
-2. Den Ordner `src/redmind/MemberCalendarBundle/` löschen.
+2. Den Ordner `src/redmind/MemberCalendarBundle/` löschen. Für die
+   Veranstaltungsarten in `app/Resources/contao/` gilt der Umstiegsabschnitt im
+   [Veranstaltungsarten-Bundle](https://github.com/Samson1964/contao-eventtypes-bundle).
 3. Die Assets liegen jetzt unter `bundles/contaomembercalendar/` statt
    `bundles/redmindmembercalendar/`. Eigene Template-Kopien im Theme anpassen:
 

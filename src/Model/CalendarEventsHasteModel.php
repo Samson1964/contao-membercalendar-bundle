@@ -27,8 +27,9 @@ use Haste\Model\Model;
  * gingen die gewählten Veranstaltungsarten beim Speichern verloren, und
  * getRelated() kennt den Beziehungstyp „haste-ManyToMany“ nicht.
  *
- * getRelated() löst die Zieltabelle über $GLOBALS['TL_MODELS'] auf; deshalb
- * registriert dieses Bundle in config.php auch das EventTypeModel.
+ * Das Feld selbst, die Tabelle tl_event_type und das dafür in
+ * $GLOBALS['TL_MODELS'] registrierte Modell, über das getRelated() die
+ * Zieltabelle auflöst, kommen aus schachbulle/contao-eventtypes-bundle.
  *
  * Das contao-dsb-bundle 1.0.0 hatte hier auf Contao\Model umgestellt; diese
  * Fassung lief nie produktiv und ist mit diesem Bundle zurückgenommen.

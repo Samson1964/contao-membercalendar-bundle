@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.1.0 (2026-11-19)
+
+* Change: Tabelle, Feld und Modell der Veranstaltungsarten kommen jetzt aus
+  `schachbulle/contao-eventtypes-bundle` (neue Abhängigkeit). Das eigene
+  `EventTypeModel` und seine Registrierung entfallen.
+
 ## Version 1.0.1 (2026-11-19)
 
 * Change: README nennt den genauen Ort der Veranstaltungsarten auf schachbund.de:

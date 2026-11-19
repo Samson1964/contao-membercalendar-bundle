@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 use Schachbulle\ContaoMembercalendarBundle\FrontendModule\CalendarFormModule;
 use Schachbulle\ContaoMembercalendarBundle\FrontendModule\CalendarListModule;
-use Schachbulle\ContaoMembercalendarBundle\Model\EventTypeModel;
 
 /*
  * Frontend-Module
@@ -25,16 +24,6 @@ use Schachbulle\ContaoMembercalendarBundle\Model\EventTypeModel;
  */
 $GLOBALS['FE_MOD']['dsb']['calendar_list'] = CalendarListModule::class;
 $GLOBALS['FE_MOD']['dsb']['calendar_form'] = CalendarFormModule::class;
-
-/*
- * Modell der Veranstaltungsarten
- *
- * Haste löst bei getRelated('eventType') die Zieltabelle über TL_MODELS auf.
- * Ohne diesen Eintrag bleiben die Veranstaltungsarten beim Bearbeiten eines
- * Termins leer. Ist das Kalenderkarten-Bundle installiert, registriert es
- * eine gleichwertige Klasse; wer zuerst kommt, gewinnt.
- */
-$GLOBALS['TL_MODELS']['tl_event_type'] = $GLOBALS['TL_MODELS']['tl_event_type'] ?? EventTypeModel::class;
 
 /*
  * Notification Center
